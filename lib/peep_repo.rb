@@ -3,7 +3,8 @@ require_relative 'peep'
 class PeepRepo
   def all
     peeps = []
-    sql = 'SELECT * FROM peeps;'
+    sql = 'SELECT peeps.*, users.display_name, users.username 
+          FROM peeps JOIN users ON peeps.author_id=users.id;'
     result_set = DatabaseConnection.exec_params(sql, [])
 
     result_set.each do |record|
