@@ -27,7 +27,7 @@ RSpec.describe Application do
     it 'posts a new chitter to the homepage' do
       response = post(
         '/',
-        peep:'This is a new peep'
+        peep: 'This is a new peep'
         )
 
       expect(response.status).to eq 200
