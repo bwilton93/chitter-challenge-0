@@ -22,4 +22,16 @@ RSpec.describe Application do
       expect(response.body).to include "This is a peep"
     end
   end
+
+  context 'POST /' do
+    it 'posts a new chitter to the homepage' do
+      response = post(
+        '/',
+        peep:'This is a new peep'
+        )
+
+      expect(response.status).to eq 200
+      expect(response.body).to include 'This is a new peep'
+    end
+  end
 end
