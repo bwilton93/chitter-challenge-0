@@ -28,4 +28,4 @@ INSERT INTO users (display_name, username, password, email) VALUES
 INSERT INTO peeps (content, date, time, author_id) VALUES
 ('This is a peep', '2023-01-03', '09:11', '1'),
 ('This is another peep', '2023-05-03', '12:11', '2'),
-('This is yet another peep', '2023-05-04', '17:11', '1');
+('This is yet another peep', '2023-05-04', '17:11', '2');

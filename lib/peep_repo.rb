@@ -29,7 +29,8 @@ class PeepRepo
     peep.content = record['content']
     peep.date = record['date']
     peep.time = record['time']
-    peep.author_id = record['author_id'].to_i
+    peep.author_name = record['display_name']
+    peep.author_username = record['username']
 
     return peep
   end

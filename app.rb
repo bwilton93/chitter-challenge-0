@@ -35,7 +35,7 @@ class Application < Sinatra::Base
     peep.content = params[:peep]
     peep.date = DateTime.now.strftime "%Y/%m/%d"
     peep.time = DateTime.now.strftime "%H:%M:%S"
-
+    peep.author_id = 1
     return peep
   end
 end
