@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>Albums</title>
+  </head>
+  <body>
+    <h1>Chitter</h1>
+    <% @peeps.each do |peep| %>
+      <div>
+        <%= peep.content %><br>
+        <%= peep.date %>, <%= peep.time %>
+      </div>
+    <% end %>
+  </body>
+</html>

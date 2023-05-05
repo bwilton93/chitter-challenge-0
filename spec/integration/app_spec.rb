@@ -15,6 +15,10 @@ RSpec.describe Application do
       response = get('/')
 
       expect(response.status).to eq 200
+      expect(response.body).to include "<h1>Chitter</h1>"
+      expect(response.body).to include "This is yet another peep"
+      expect(response.body).to include "This is another peep"
+      expect(response.body).to include "This is a peep"
     end
   end
 end
