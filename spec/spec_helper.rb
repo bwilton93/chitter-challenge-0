@@ -18,3 +18,9 @@ RSpec.configure do |config|
 end
 
 DatabaseConnection.connect('chitter_test')
+
+def reset_test_tables
+  test_seeds = File.read('spec/seeds/test_seeds.sql')
+  connection = PG.connect({ host: '127.0.0.1', dbname: 'chitter_test' })
+  connection.exec(test_seeds)
+end
