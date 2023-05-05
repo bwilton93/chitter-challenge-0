@@ -10,7 +10,7 @@ class PeepRepo
       peeps << new_peep(record)
     end
     
-    return peeps
+    return peeps.sort_by { |peep| peep.id }.reverse!
   end
   
   private
