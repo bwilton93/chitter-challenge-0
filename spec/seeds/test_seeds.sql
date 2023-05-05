@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS peeps, users;
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
+  display_name text,
   username text,
   password text,
   email text
@@ -20,9 +21,9 @@ CREATE TABLE peeps (
 
 TRUNCATE TABLE peeps, users RESTART IDENTITY;
 
-INSERT INTO users (username, password, email) VALUES
-('User 1', 'fake_password', 'fake_email@email.com'),
-('User 2', 'fake_password2', 'fake_email2@email.com');
+INSERT INTO users (display_name, username, password, email) VALUES
+('User 1', 'user1', 'fake_password', 'fake_email@email.com'),
+('User 2', 'user2', 'fake_password2', 'fake_email2@email.com');
 
 INSERT INTO peeps (content, date, time, author_id) VALUES
 ('This is a peep', '2023-01-03', '09:11', '1'),
