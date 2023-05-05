@@ -18,7 +18,7 @@ class Application < Sinatra::Base
   end
 
   post "/" do
-    PeepRepo.new.create(new_peep(params[:peep]))
+    PeepRepo.new.create(new_peep)
     return_all_peeps
   end
   
@@ -30,7 +30,7 @@ class Application < Sinatra::Base
     return erb(:index)
   end
 
-  def new_peep(content)
+  def new_peep
     peep = Peep.new
     peep.content = params[:peep]
     peep.date = DateTime.now.strftime "%Y/%m/%d"
