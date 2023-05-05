@@ -14,20 +14,28 @@ class Application < Sinatra::Base
   end
   
   get "/" do
+    return_all_peeps
+  end
+
+  post "/" do
+    PeepRepo.new.create(new_peep(params[:peep]))
+    return_all_peeps
+  end
+  
+  private
+  
+  def return_all_peeps
     repo = PeepRepo.new
     @peeps = repo.all
     return erb(:index)
   end
 
-  post "/" do
-    repo = PeepRepo.new
-    new_peep = Peep.new
-    new_peep.content = params[:peep]
-    new_peep.date = DateTime.now.strftime "%Y/%m/%d"
-    new_peep.time = DateTime.now.strftime "%H:%M:%S"
-    repo.create(new_peep)
+  def new_peep(content)
+    peep = Peep.new
+    peep.content = params[:peep]
+    peep.date = DateTime.now.strftime "%Y/%m/%d"
+    peep.time = DateTime.now.strftime "%H:%M:%S"
 
-    @peeps = repo.all
-    return erb(:index)
+    return peep
   end
 end
