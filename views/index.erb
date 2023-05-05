@@ -4,6 +4,10 @@
   </head>
   <body>
     <h1>Chitter</h1>
+    <form action="/" method="POST">
+      <input type="text" placeholder="What's on your mind?" name="peep">
+      <input type="submit" value="Send">
+    </form>
     <% @peeps.each do |peep| %>
       <div>
         <%= peep.content %><br>
