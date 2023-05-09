@@ -1,5 +1,4 @@
 require 'date'
-require 'bcrypt'
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
@@ -8,6 +7,8 @@ require_relative 'lib/peep_repo'
 DatabaseConnection.connect('chitter_test')
 
 class Application < Sinatra::Base
+  enable :sessions
+
   # This allows the app code to refresh
   # without having to restart the server.
   configure :development do
@@ -20,6 +21,10 @@ class Application < Sinatra::Base
   end
 
   post "/" do
+    # if session[:user_id].nil?
+    #   return erb(:login)
+    # end
+
     PeepRepo.new.create(new_peep)
     @peeps = return_all_peeps
     return erb(:index)

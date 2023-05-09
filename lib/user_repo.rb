@@ -15,14 +15,13 @@ class UserRepo
   end
 
   def create(user)
-    if !check(user.username, user.email)
-      params = [user.display_name, user.username, user.password, user.email]
+    return unless !check(user.username, user.email)
+    params = [user.display_name, user.username, user.password, user.email]
 
-      sql = 'INSERT INTO users (display_name, username, password, email)
-            VALUES ($1, $2, $3, $4);'
+    sql = 'INSERT INTO users (display_name, username, password, email)
+          VALUES ($1, $2, $3, $4);'
 
-      DatabaseConnection.exec_params(sql, params)
-    end
+    DatabaseConnection.exec_params(sql, params)
   end
 
   def check(username, email)
