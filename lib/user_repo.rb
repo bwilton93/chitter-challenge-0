@@ -16,7 +16,6 @@ class UserRepo
 
   def create(user)
     if !check(user.username, user.email)
-      p true
       params = [user.display_name, user.username, user.password, user.email]
 
       sql = 'INSERT INTO users (display_name, username, password, email)

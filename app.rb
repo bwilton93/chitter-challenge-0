@@ -1,4 +1,5 @@
 require 'date'
+require 'bcrypt'
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative 'lib/database_connection'
@@ -14,12 +15,14 @@ class Application < Sinatra::Base
   end
   
   get "/" do
-    return_all_peeps
+    @peeps = return_all_peeps
+    return erb(:index)
   end
 
   post "/" do
     PeepRepo.new.create(new_peep)
-    return_all_peeps
+    @peeps = return_all_peeps
+    return erb(:index)
   end
 
   get "/login" do
@@ -34,8 +37,8 @@ class Application < Sinatra::Base
   
   def return_all_peeps
     repo = PeepRepo.new
-    @peeps = repo.all
-    return erb(:index)
+    peeps = repo.all
+    return peeps
   end
 
   def new_peep
