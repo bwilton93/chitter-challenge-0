@@ -44,6 +44,20 @@ RSpec.describe Application do
       expect(response.body).to include '<input type="text"> name="name">'
       expect(response.body).to include '<input type="text"> name="email">'
       expect(response.body).to include '<input type="text"> name="password">'
+      expect(response.body).to include '<input type="submit" value="Log in!">'
+    end
+  end
+  
+  context 'GET /signup' do
+    it 'displays the login page' do
+      response = get('/login')
+      
+      expect(response.status).to eq 200
+      expect(response.body).to include '<form>'
+      expect(response.body).to include '<input type="text"> name="name">'
+      expect(response.body).to include '<input type="text"> name="email">'
+      expect(response.body).to include '<input type="text"> name="password">'
+      expect(response.body).to include '<input type="submit" value="Sign up!">'
     end
   end
 end
