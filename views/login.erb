@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <title>Chitter - Sign up</title>
+  </head>
+  <body>
+    <div>
+      <h1>Sign up!</h1>
+      <div>
+        <form action="/login" method="get">
+          <input type="submit" value="Log in!">
+        </form>
+        <form action ="/signup" method="get">
+          <input type="submit" value="Sign up!">
+        </form>
+      </div>
+    </div>
+    <form action="/" method="POST">
+      <input type="text" placeholder="What's on your mind?" name="peep">
+      <input type="submit" value="Send">
+    </form>
+    <% @peeps.each do |peep| %>
+      <div>
+        <strong><%= peep.author_name %></strong><br>
+        <%= peep.content %><br>
+        <%= peep.date %>, <%= peep.time %>
+      </div>
+    <% end %>
+  </body>
+</html>
