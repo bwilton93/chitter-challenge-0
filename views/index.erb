@@ -10,6 +10,7 @@
     </form>
     <% @peeps.each do |peep| %>
       <div>
+        <strong><%= peep.author_name %></strong> - <%= peep.author_username %><br>
         <%= peep.content %><br>
         <%= peep.date %>, <%= peep.time %>
       </div>
