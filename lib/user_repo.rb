@@ -31,8 +31,7 @@ class UserRepo
 
     result = DatabaseConnection.exec_params(sql, params)
     
-    return false if result.first.nil?
-    return true
+    return !result.first.nil?
   end
 
   private 
