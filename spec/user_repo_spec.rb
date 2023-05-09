@@ -22,7 +22,7 @@ RSpec.describe UserRepo do
       expect(user).to eq false
     end
     
-    it 'returns true when some entires found' do
+    it 'returns true when some entries found' do
       repo = UserRepo.new
       
       user = repo.check('user1', 'fake_email2@email.com')
