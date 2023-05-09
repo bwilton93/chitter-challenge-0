@@ -15,7 +15,7 @@
       </div>
     </div>
     <form action="/" method="POST">
-      <input type="text" placeholder="What's on your mind?" name="peep">
+      <input type="text" placeholder="What's on your mind?" required="required" name="peep">
       <input type="submit" value="Send">
     </form>
     <% @peeps.each do |peep| %>
