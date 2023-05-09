@@ -21,6 +21,14 @@ class Application < Sinatra::Base
     PeepRepo.new.create(new_peep)
     return_all_peeps
   end
+
+  get "/login" do
+    return erb(:login)
+  end
+
+  get "/signup" do
+    return erb(:signup)
+  end
   
   private
   

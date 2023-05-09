@@ -34,4 +34,16 @@ RSpec.describe Application do
       expect(response.body).to include 'This is a new peep'
     end
   end
+
+  context 'GET /login' do
+    it 'displays the login page' do
+      response = get('/login')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include '<form>'
+      expect(response.body).to include '<input type="text"> name="name">'
+      expect(response.body).to include '<input type="text"> name="email">'
+      expect(response.body).to include '<input type="text"> name="password">'
+    end
+  end
 end
