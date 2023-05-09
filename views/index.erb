@@ -5,9 +5,15 @@
   <body>
     <div>
       <h1>Chitter</h1>
-      <button type="button">Log in!</button>
-      <button type="button">Sign up!</button>
-    <div>
+      <div>
+        <form action="/login" method="get">
+          <input type="submit" value="Log in!">
+        </form>
+        <form action ="/signup" method="get">
+          <input type="submit" value="Sign up!">
+        </form>
+      </div>
+    </div>
     <form action="/" method="POST">
       <input type="text" placeholder="What's on your mind?" name="peep">
       <input type="submit" value="Send">
