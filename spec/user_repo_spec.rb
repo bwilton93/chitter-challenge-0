@@ -13,6 +13,22 @@ RSpec.describe UserRepo do
     expect(users.first.display_name).to eq 'User 1'
     expect(users.last.display_name).to eq 'User 2'
   end
+
+  context 'when checking for existing username and email' do
+    it 'returns false if no entries found' do
+      repo = UserRepo.new
+      
+      user = repo.check('user4', 'fake_email4@email.com')
+      expect(user).to eq false
+    end
+    
+    it 'returns true when some entires found' do
+      repo = UserRepo.new
+      
+      user = repo.check('user1', 'fake_email2@email.com')
+      expect(user).to eq true
+    end
+  end
   
   context 'creating a new user' do
     it 'succeeds when the username and email are unique' do

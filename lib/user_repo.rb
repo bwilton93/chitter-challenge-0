@@ -23,11 +23,22 @@ class UserRepo
     DatabaseConnection.exec_params(sql, params)
   end
 
+  def check(username, email)
+    params = [username, email]
+
+    sql = 'SELECT * FROM users WHERE username=$1 OR email=$2;'
+
+    result = DatabaseConnection.exec_params(sql, params)
+    
+    return false if result.first.nil?
+    return true
+  end
+
   private 
 
   def user(record)
     user = User.new
-
+    user.id = record['id'].to_i
     user.display_name = record['display_name']
     user.username = record['username']
 
