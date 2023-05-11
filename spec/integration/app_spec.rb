@@ -34,7 +34,7 @@ RSpec.describe Application do
       expect(response.body).to include '<h1>Log in to Chitter!</h1>'
       expect(response.body).to include '<form'
       expect(response.body).to include '<input type="text" placeholder="Enter username or email" required="required" name="login_name">'
-      expect(response.body).to include '<input type="text" placeholder="Password" required="required" name="password">'
+      expect(response.body).to include '<input type="password" placeholder="Password" required="required" name="password">'
       expect(response.body).to include '<input type="submit" value="Log in!">'
     end
 
@@ -57,7 +57,7 @@ RSpec.describe Application do
       expect(response.body).to include '<h1>Log in to Chitter!</h1>'
       expect(response.body).to include '<form'
       expect(response.body).to include '<input type="text" placeholder="Enter username or email" required="required" name="login_name">'
-      expect(response.body).to include '<input type="text" placeholder="Password" required="required" name="password">'
+      expect(response.body).to include '<input type="password" placeholder="Password" required="required" name="password">'
       expect(response.body).to include '<input type="submit" value="Log in!">'
     end
   end
@@ -71,7 +71,7 @@ RSpec.describe Application do
       expect(response.body).to include '<form'
       expect(response.body).to include '<input type="text" placeholder="Name" required="required" name="name">'
       expect(response.body).to include '<input type="text" placeholder="Email" required="required" name="email">'
-      expect(response.body).to include '<input type="text" placeholder="Password" required="required" name="password">'
+      expect(response.body).to include '<input type="password" placeholder="Password" required="required" name="password">'
       expect(response.body).to include '<input type="submit" value="Sign up!">'
     end
   end
