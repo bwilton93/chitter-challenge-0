@@ -46,6 +46,11 @@ class Application < Sinatra::Base
     show_peeps
   end
 
+  get "/logout" do
+    session[:user_id] = nil
+    show_peeps
+  end
+
   get "/signup" do
     return erb(:signup)
   end
@@ -68,6 +73,7 @@ class Application < Sinatra::Base
   end
 
   def show_peeps
+    @session_id = session[:user_id]
     @peeps = return_all_peeps
     return erb(:index)
   end
