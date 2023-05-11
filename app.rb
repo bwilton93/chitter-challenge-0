@@ -1,6 +1,7 @@
 require 'date'
 require 'sinatra/base'
 require 'sinatra/reloader'
+require_relative 'lib/user_repo'
 require_relative 'lib/database_connection'
 require_relative 'lib/peep_repo'
 
@@ -15,6 +16,7 @@ class Application < Sinatra::Base
   
   get "/" do
     @peeps = return_all_peeps
+    p session[:user_id]
     return erb(:index)
   end
 
@@ -30,7 +32,24 @@ class Application < Sinatra::Base
   end
 
   get "/login" do
+    p session[:user_id]
     return erb(:login)
+  end
+
+  post "/login" do
+    login_name = params[:login_name]
+    password = params[:password]
+
+    user = UserRepo.new.find_record(login_name)
+
+    if UserRepo.new.check(login_name, login_name)
+      if user.password = password
+        session[:user_id] = user.id
+        redirect '/'
+      end
+    end
+
+    redirect '/login'
   end
 
   get "/signup" do

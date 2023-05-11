@@ -39,7 +39,11 @@ class UserRepo
 
     result = DatabaseConnection.exec_params(sql, [input])
 
-    return user(result.first)
+    if result.first.nil?
+      return false
+    else
+      return user(result.first)
+    end
   end
 
   private 
