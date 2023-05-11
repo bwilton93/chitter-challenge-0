@@ -9,8 +9,6 @@ DatabaseConnection.connect('chitter_test')
 class Application < Sinatra::Base
   enable :sessions
 
-  # This allows the app code to refresh
-  # without having to restart the server.
   configure :development do
     register Sinatra::Reloader
   end
