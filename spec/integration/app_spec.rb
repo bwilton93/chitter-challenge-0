@@ -127,6 +127,15 @@ RSpec.describe Application do
       end
     end
   end
+
+  context 'GET /logout' do
+    it 'succesfully logs out' do
+      response = get('/logout')
+
+      expect(response.status).to eq 200
+      expect(response.body).to include '<form action="/login" method="get">'
+    end
+  end
   
   context 'GET /signup' do
     it 'displays the signup page' do
