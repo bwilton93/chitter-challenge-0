@@ -38,12 +38,12 @@ class Application < Sinatra::Base
 
     user = UserRepo.new.find_record(login_name)
 
-    if UserRepo.new.check(login_name, login_name) && user.password == password
-      session[:user_id] = user.id
-      show_peeps
-    else
-      return erb(:login)
-    end
+    return erb(:login) unless UserRepo.new.check(login_name, login_name) 
+      
+    return erb(:login) unless user.password == password
+
+    session[:user_id] = user.id
+    show_peeps
   end
 
   get "/signup" do
