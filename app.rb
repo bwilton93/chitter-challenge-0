@@ -15,9 +15,7 @@ class Application < Sinatra::Base
   end
   
   get "/" do
-    @peeps = return_all_peeps
-    p session[:user_id]
-    return erb(:index)
+    show_peeps
   end
 
   post "/" do
@@ -27,8 +25,7 @@ class Application < Sinatra::Base
     end
 
     PeepRepo.new.create(new_peep)
-    @peeps = return_all_peeps
-    return erb(:index)
+    show_peeps
   end
 
   get "/login" do
@@ -43,10 +40,10 @@ class Application < Sinatra::Base
 
     if UserRepo.new.check(login_name, login_name) && user.password == password
       session[:user_id] = user.id
-      redirect '/'
+      show_peeps
+    else
+      return erb(:login)
     end
-
-    redirect '/login'
   end
 
   get "/signup" do
@@ -68,5 +65,10 @@ class Application < Sinatra::Base
     peep.time = DateTime.now.strftime "%H:%M:%S"
     peep.author_id = 1
     return peep
+  end
+
+  def show_peeps
+    @peeps = return_all_peeps
+    return erb(:index)
   end
 end

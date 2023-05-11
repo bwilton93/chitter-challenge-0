@@ -44,9 +44,6 @@ RSpec.describe Application do
         login_name: 'user1',
         password: 'fake_password'
       )
-
-      expect(response.status).to eq 302
-
       response = post(
         '/',
         peep: 'This is a new peep',
@@ -71,8 +68,63 @@ RSpec.describe Application do
   end
 
   context 'POST /login' do
-    it 'logs in with correct information' do
-    
+    context 'logs in' do
+      it 'with correct username' do
+        response = post(
+          '/login',
+          login_name: 'user1',
+          password: 'fake_password'
+        )
+
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h1>Chitter</h1>'
+      end
+
+      it 'with correct email' do
+        response = post(
+          '/login',
+          login_name: 'fake_email@email.com',
+          password: 'fake_password'
+        )
+
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h1>Chitter</h1>'
+      end
+    end
+
+    context 'fails to log in' do
+      it 'with incorrect username' do
+        response = post(
+          '/login',
+          login_name: 'user3',
+          password: 'fake_password'
+        )
+
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h1>Log in to Chitter!</h1>'
+      end
+
+      it 'with incorrect email' do
+        response = post(
+          '/login',
+          login_name: 'fake_email3@email.com',
+          password: 'fake_password'
+        )
+
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h1>Log in to Chitter!</h1>'
+      end
+
+      it 'with incorrect password' do
+        response = post(
+          '/login',
+          login_name: 'fake_email@email.com',
+          password: 'fake_password2'
+        )
+
+        expect(response.status).to eq 200
+        expect(response.body).to include '<h1>Log in to Chitter!</h1>'
+      end
     end
   end
   
