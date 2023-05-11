@@ -38,7 +38,15 @@ RSpec.describe Application do
       expect(response.body).to include '<input type="submit" value="Log in!">'
     end
 
-    xit 'posts a new chitter to the homepage when logged in' do
+    it 'posts a new chitter to the homepage when logged in' do
+      response = post(
+        '/login',
+        login_name: 'user1',
+        password: 'fake_password'
+      )
+
+      expect(response.status).to eq 302
+
       response = post(
         '/',
         peep: 'This is a new peep',
@@ -59,6 +67,12 @@ RSpec.describe Application do
       expect(response.body).to include '<input type="text" placeholder="Enter username or email" required="required" name="login_name">'
       expect(response.body).to include '<input type="password" placeholder="Password" required="required" name="password">'
       expect(response.body).to include '<input type="submit" value="Log in!">'
+    end
+  end
+
+  context 'POST /login' do
+    it 'logs in with correct information' do
+    
     end
   end
   

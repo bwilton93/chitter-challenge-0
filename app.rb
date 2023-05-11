@@ -32,7 +32,6 @@ class Application < Sinatra::Base
   end
 
   get "/login" do
-    p session[:user_id]
     return erb(:login)
   end
 
@@ -42,11 +41,9 @@ class Application < Sinatra::Base
 
     user = UserRepo.new.find_record(login_name)
 
-    if UserRepo.new.check(login_name, login_name)
-      if user.password = password
-        session[:user_id] = user.id
-        redirect '/'
-      end
+    if UserRepo.new.check(login_name, login_name) && user.password == password
+      session[:user_id] = user.id
+      redirect '/'
     end
 
     redirect '/login'
