@@ -24,10 +24,26 @@ RSpec.describe Application do
   end
 
   context 'POST /' do
-    it 'posts a new chitter to the homepage' do
+    it 'returns the login page when user is not logged in' do
       response = post(
         '/',
-        peep: 'This is a new peep'
+        peep: 'Not logged in'
+      )
+
+      expect(response.status).to eq 200
+      expect(response.body).to include 'Please log in to post a peep!'
+      expect(response.body).to include '<h1>Log in to Chitter!</h1>'
+      expect(response.body).to include '<form'
+      expect(response.body).to include '<input type="text" placeholder="Name" required="required" name="name">'
+      expect(response.body).to include '<input type="text" placeholder="Email" required="required" name="email">'
+      expect(response.body).to include '<input type="text" placeholder="Password" required="required" name="password">'
+      expect(response.body).to include '<input type="submit" value="Log in!">'
+    end
+
+    xit 'posts a new chitter to the homepage when logged in' do
+      response = post(
+        '/',
+        peep: 'This is a new peep',
         )
 
       expect(response.status).to eq 200

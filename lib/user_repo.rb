@@ -34,6 +34,14 @@ class UserRepo
     return !result.first.nil?
   end
 
+  def find_record(input)
+    sql = 'SELECT * FROM users WHERE username=$1 OR email=$1;'
+
+    result = DatabaseConnection.exec_params(sql, [input])
+
+    return user(result.first)
+  end
+
   private 
 
   def user(record)
@@ -41,7 +49,8 @@ class UserRepo
     user.id = record['id'].to_i
     user.display_name = record['display_name']
     user.username = record['username']
-
+    user.password = record['password']
+    user.email = record['email']
     return user
   end
 end

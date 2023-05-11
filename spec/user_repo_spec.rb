@@ -67,4 +67,26 @@ RSpec.describe UserRepo do
       expect(users.last.display_name).to eq 'User 2'
     end
   end
+
+  context 'logging in' do
+    it 'finds a user by email' do
+      email = 'fake_email@email.com'
+
+      repo = UserRepo.new
+      result = repo.find_record(email)
+
+      expect(result.display_name).to eq 'User 1'
+      expect(result.username).to eq 'user1'
+    end
+
+    it 'finds a user by username' do
+      username = 'user2'
+
+      repo = UserRepo.new
+      result = repo.find_record(username)
+
+      expect(result.display_name).to eq 'User 2'
+      expect(result.email).to eq 'fake_email2@email.com'
+    end
+  end
 end

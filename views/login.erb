@@ -11,6 +11,9 @@
         </form>
       </div>
     </div>
+    <% if defined?(@login_message) != nil %>
+      <p><%= @login_message %></p>
+    <% end %>
     <form action="/login" method="POST">
       <input type="text" placeholder="Name" required="required" name="name">
       <input type="text" placeholder="Email" required="required" name="email">

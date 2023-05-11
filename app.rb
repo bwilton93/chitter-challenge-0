@@ -19,9 +19,10 @@ class Application < Sinatra::Base
   end
 
   post "/" do
-    # if session[:user_id].nil?
-    #   return erb(:login)
-    # end
+    if session[:user_id].nil?
+      @login_message = "Please log in to post a peep!"
+      return erb(:login)
+    end
 
     PeepRepo.new.create(new_peep)
     @peeps = return_all_peeps
