@@ -33,12 +33,9 @@ class Application < Sinatra::Base
   end
 
   post "/login" do
-    login_name = params[:login_name]
-    password = params[:password]
+    session[:user_id] = UserRepo.new.log_in(params[:login_name], params[:password])
 
-    user = UserRepo.new.login_in(login_name, password)
-
-    session[:user_id] = user.id
+    return erb(:login) if session[:user_id].nil?
     show_peeps
   end
 
