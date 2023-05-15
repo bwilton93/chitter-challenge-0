@@ -34,6 +34,13 @@ class UserRepo
     return !result.first.nil?
   end
 
+  def log_in(login_input, password)
+    user = find_record(login_input)
+    return nil if !user
+    user.password == password ? user.id.to_i : nil
+    # BCrypt::Password.new(user.password) == password ? user.id.to_i : nil
+  end
+
   def find_record(input)
     sql = 'SELECT * FROM users WHERE username=$1 OR email=$1;'
 

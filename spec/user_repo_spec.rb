@@ -69,24 +69,36 @@ RSpec.describe UserRepo do
   end
 
   context 'logging in' do
-    it 'finds a user by email' do
-      email = 'fake_email@email.com'
-
+    it 'returns false if the email doesnt exist' do
       repo = UserRepo.new
-      result = repo.find_record(email)
-
-      expect(result.display_name).to eq 'User 1'
-      expect(result.username).to eq 'user1'
+      email = 'email'
+      password = 'wrong_password'
+      result = repo.log_in(email, password)
+      expect(result).to eq nil
     end
 
-    it 'finds a user by username' do
-      username = 'user2'
-
+    it 'returns false if the username doesnt exist' do
       repo = UserRepo.new
-      result = repo.find_record(username)
+      username = 'username'
+      password = 'wrong_password'
+      result = repo.log_in(username, password)
+      expect(result).to eq nil
+    end
 
-      expect(result.display_name).to eq 'User 2'
-      expect(result.email).to eq 'fake_email2@email.com'
+    it 'returns user.id when the email and passwords match' do
+      repo = UserRepo.new
+      email = 'fake_email@email.com'
+      password = 'fake_password'
+      result = repo.log_in(email, password)
+      expect(result).to eq 1
+    end
+
+    it 'returns the user.id when the username and passwords match' do
+      repo = UserRepo.new
+      username = 'user2'
+      password = 'fake_password2'
+      result = repo.log_in(username, password)
+      expect(result).to eq 2
     end
   end
 end

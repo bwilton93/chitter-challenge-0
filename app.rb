@@ -36,11 +36,7 @@ class Application < Sinatra::Base
     login_name = params[:login_name]
     password = params[:password]
 
-    user = UserRepo.new.find_record(login_name)
-
-    return erb(:login) unless UserRepo.new.check(login_name, login_name) 
-      
-    return erb(:login) unless user.password == password
+    user = UserRepo.new.login_in(login_name, password)
 
     session[:user_id] = user.id
     show_peeps
