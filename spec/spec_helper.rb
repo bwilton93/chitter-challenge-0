@@ -1,3 +1,5 @@
+ENV['ENV'] = 'test'
+
 require 'simplecov'
 require 'simplecov-console'
 require 'database_connection'
@@ -16,8 +18,6 @@ RSpec.configure do |config|
     puts "\e[33mTry it now! Just run: rubocop\e[0m"
   end
 end
-
-DatabaseConnection.connect('chitter_test')
 
 def reset_test_tables
   test_seeds = File.read('spec/seeds/test_seeds.sql')
