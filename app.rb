@@ -47,6 +47,24 @@ class Application < Sinatra::Base
   get "/signup" do
     return erb(:signup)
   end
+
+  post "/signup" do
+    repo = UserRepo.new
+    new_user = User.new
+
+    new_user.display_name = params[:name]
+    new_user.username = params[:name]
+    new_user.email = params[:email]
+    new_user.password = params[:password]
+
+    return erb(:signup) if !repo.create(new_user)
+    
+    user = repo.find_record(new_user.email)
+    session[:user_id] = user.id
+
+    @session_id = session[:user_id]
+    show_peeps
+  end
   
   private
   
@@ -61,7 +79,7 @@ class Application < Sinatra::Base
     peep.content = params[:peep]
     peep.date = DateTime.now.strftime "%Y/%m/%d"
     peep.time = DateTime.now.strftime "%H:%M:%S"
-    peep.author_id = 1
+    peep.author_id = session[:user_id]
     return peep
   end
 

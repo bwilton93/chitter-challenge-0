@@ -150,4 +150,36 @@ RSpec.describe Application do
       expect(response.body).to include '<input type="submit" value="Sign up!">'
     end
   end
+
+  context 'POST /signup' do
+    it 'should create and log in to a new user account' do
+      response = post(
+        '/signup',
+        name: 'Barney',
+        email: 'test@email.com',
+        password: 'password'
+        )
+
+      expect(response.status).to eq 200
+      expect(response.body).not_to include '<form action ="/signup" method="get">'
+      expect(response.body).not_to include '<form action="/login" method="get">'
+      expect(response.body).to include '<form action="/logout" method="get">'
+    end
+    
+    it 'should return to sign up form if email already taken' do
+      response = post(
+        '/signup',
+        name: 'user1',
+        email: 'fake_email@email.com',
+        password: 'password'
+        )
+  
+      expect(response.body).to include '<h1>Sign up for Chitter!</h1>'
+      expect(response.body).to include '<form'
+      expect(response.body).to include '<input type="text" placeholder="Name" required="required" name="name">'
+      expect(response.body).to include '<input type="text" placeholder="Email" required="required" name="email">'
+      expect(response.body).to include '<input type="password" placeholder="Password" required="required" name="password">'
+      expect(response.body).to include '<input type="submit" value="Sign up!">'
+    end
+  end
 end
