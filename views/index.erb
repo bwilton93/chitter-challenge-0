@@ -1,6 +1,7 @@
 <html>
   <head>
     <title>Chitter</title>
+    <link rel="stylesheet" href="/style.css" >
   </head>
   <body>
     <div>
@@ -27,10 +28,10 @@
     </form>
     <% if !@peeps.nil? %>
       <% @peeps.each do |peep| %>
-        <div>
-          <strong><%= peep.author_name %></strong><br>
-          <%= peep.content %><br>
-          <%= peep.date %>, <%= peep.time %>
+        <div class='peep'>
+          <span class='author'><%= peep.author_name %></span><br>
+          <span class='content'><%= peep.content %></span><br>
+          <span class='timestamp'><%= peep.date %>, <%= peep.time %></span>
         </div>
       <% end %>
     <% end %>

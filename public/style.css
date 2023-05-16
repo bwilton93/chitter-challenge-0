@@ -1,0 +1,26 @@
+body {
+  font-family: sans-serif;
+}
+
+.peep {
+  background-color: #E8F5E9; /* Light green background color */
+  border: 1px solid #81C784; /* Light green border */
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.peep .author {
+  font-weight: bold;
+  color: #2E7D32; /* Dark green text color */
+}
+
+.peep .content {
+  margin-top: 5px;
+  color: #37474F; /* Dark grey text color */
+}
+
+.peep .timestamp {
+  font-size: 12px;
+  color: #689F38; /* Dark lime text color */
+}
